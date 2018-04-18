@@ -13,4 +13,8 @@ public class PlayerManager : MonoBehaviour {
         ServiceLocator.instance.playerManager = this;
     }
 
+    public void TankAttackEnemy1()
+    {
+        tank.GetComponent<BasicPlayer>().AttackTarget(tank.GetComponent<BasicPlayer>(), ServiceLocator.instance.enemyManager.enemies[0].GetComponent<BasicEnemy>());
+    }
 }
