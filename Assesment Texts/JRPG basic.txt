@@ -21,5 +21,11 @@ JRPG - The Basic
 				- Run
 			- max of 5 enemies (List<Parent Class>) 
 				-(Parent Class - Each enemy is taken from a base and has extra abilities on top of it.)
+					- Stats
+						- Str (physical attack)
+						- Dex (Physical Defense and Dodge)
+						- Mag (magical attack)
+						- Res (Magical Defense and Resist)
+						- Pie (Healing)
 			- Screen Shake and Sounds on hit (singleton - tells juice to be juicy)
 		

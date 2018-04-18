@@ -13,6 +13,11 @@ public class UIManager : MonoBehaviour {
 
     public GameObject attackTargeter;
 
+    void Awake()
+    {
+        ServiceLocator.instance.uiManager = this;
+    }
+
     public void OnAttackClick()
     {
         attackButton.interactable = false;
