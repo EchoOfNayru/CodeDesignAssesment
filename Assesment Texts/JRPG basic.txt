@@ -1,0 +1,25 @@
+JRPG - The Basic
+	- Battle System (Service Locator - stores a reference to everything needed for the battle)
+		- Final Fantasy style combat
+			- Turn Based (singleton - controls the overall battle. Only one battle is happening. Delegates to track when characters do things.)
+			- party of 3 (List<Parent Class>) 
+				- (Parent Class - Each character is taken from a base and has extra abilities on top of it.)
+					- Stats
+						- Str (physical attack)
+						- Dex (Physical Defense and Dodge)
+						- Mag (magical attack)
+						- Res (Magical Defense and Resist)
+						- Pie (Healing)
+				- physical/tank
+				- magical/dps
+				- healer/utility
+			- battle menu (singleton - controls player interaction)
+				- Basic Attack
+				- Skills
+				- Items
+				- Block
+				- Run
+			- max of 5 enemies (List<Parent Class>) 
+				-(Parent Class - Each enemy is taken from a base and has extra abilities on top of it.)
+			- Screen Shake and Sounds on hit (singleton - tells juice to be juicy)
+		
