@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
-    public BasicPlayer tank;
-    public BasicPlayer magic;
-    public BasicPlayer healer;
+    public CharacterBase tank;
+    public CharacterBase magic;
+    public CharacterBase healer;
 
     public CharacterBase activeCharacter;
-    public BasicEnemy currentEnemy;
+    public CharacterBase currentEnemy;
 
     UIManager uiManager;
 
-    public Queue<CharacterBase> TurnOrder = new Queue<CharacterBase>();
+    public List<CharacterBase> TurnOrder = new List<CharacterBase>();
 
-    public delegate void EnemyUpdate(BasicEnemy.StatsToShow stats);
+    public delegate void EnemyUpdate(CharacterBase.Stats stats);
     public EnemyUpdate UpdateEnemy;
 
     public delegate void NoEnemy();
     public NoEnemy enemyLost;
 
-    public delegate void PlayerUpdate(BasicPlayer.Stats stats);
+    public delegate void PlayerUpdate(CharacterBase.Stats stats);
     public PlayerUpdate UpdatePlayer;
 
     void Awake()
@@ -33,12 +33,11 @@ public class PlayerManager : MonoBehaviour {
     {
         uiManager = ServiceLocator.instance.uiManager;
 
-        TurnOrder.Enqueue(tank);
-        TurnOrder.Enqueue(magic);
-        TurnOrder.Enqueue(healer);
+        TurnOrder.Add(tank);
+        TurnOrder.Add(magic);
+        TurnOrder.Add(healer);
 
-        activeCharacter = TurnOrder.Dequeue();
-        TurnOrder.Enqueue(activeCharacter);
+        EndTurn();
     }
 
     void Update()
@@ -51,15 +50,29 @@ public class PlayerManager : MonoBehaviour {
             {
                 if (hit.collider != null)
                 {
-                    BasicEnemy targetCache = hit.collider.gameObject.GetComponent<BasicEnemy>();
+                    CharacterBase targetCache = hit.collider.gameObject.GetComponent<CharacterBase>();
                     if (targetCache != null)
                     {
-                        currentEnemy = targetCache;
-                        UpdateEnemy(currentEnemy.stats);
-                        Debug.Log(currentEnemy);
+                        if (targetCache.isEnemy)
+                        {
+                            currentEnemy = targetCache;
+                            UpdateEnemy(currentEnemy.myStats);
+                            Debug.Log(currentEnemy);
+                        }
                     }
                 }
             }
+        }
+    }
+
+    public void EndTurn()
+    {
+        activeCharacter = TurnOrder[0];
+        TurnOrder.Remove(activeCharacter);
+        TurnOrder.Add(activeCharacter);
+        if (activeCharacter.isPlayer)
+        {
+            UpdatePlayer(activeCharacter.myStats);
         }
     }
 }

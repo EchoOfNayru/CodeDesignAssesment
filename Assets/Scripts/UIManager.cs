@@ -24,7 +24,10 @@ public class UIManager : MonoBehaviour {
     void Awake()
     {
         ServiceLocator.instance.uiManager = this;
-        ServiceLocator.instance.playerManager.UpdatePlayer += ShowPlayerStats;
+        if (ServiceLocator.instance.playerManager != null)
+        {
+            ServiceLocator.instance.playerManager.UpdatePlayer += ShowPlayerStats;
+        }
     }
 
     void Start()
@@ -32,7 +35,6 @@ public class UIManager : MonoBehaviour {
         playerManager = ServiceLocator.instance.playerManager;
         playerManager.UpdateEnemy += ShowTargetedEnemy;
         playerManager.enemyLost += NoTargetedEnemy;
-        playerManager.enemyLost();
     }
 
     public void OnAttackClick()
@@ -110,7 +112,7 @@ public class UIManager : MonoBehaviour {
         selectTarget.SetActive(false);
     }
 
-    public void ShowTargetedEnemy(BasicEnemy.StatsToShow stats)
+    public void ShowTargetedEnemy(CharacterBase.Stats stats)
     {
         // arrow pointing to enemy
         Vector3 targetPosition = ServiceLocator.instance.mainCamera.WorldToScreenPoint(playerManager.currentEnemy.transform.position);
@@ -123,7 +125,16 @@ public class UIManager : MonoBehaviour {
         enemyStats.Strength.text = "Att : " + stats.str;
         enemyStats.Dex.text = "Def : " + stats.dex;
         enemyStats.Res.text = "Res : " + stats.res;
-        enemyStats.Weakness.text = "Weak : " + stats.weakness;
+        string weaknessString;
+        if (stats.weakness == 1)
+        {
+            weaknessString = "none";
+        }
+        else
+        {
+            weaknessString = "none";
+        }
+        enemyStats.Weakness.text = "Weak : " + weaknessString;
     }
 
     public void NoTargetedEnemy()
@@ -134,16 +145,17 @@ public class UIManager : MonoBehaviour {
         enemyStats.Dex.text = "Def : ???";
         enemyStats.Res.text = "Res : ???";
         enemyStats.Weakness.text = "Weak : ???";
+        playerManager.currentEnemy = null;
     }
 
-    public void ShowPlayerStats(BasicPlayer.Stats stats)
+    public void ShowPlayerStats(CharacterBase.Stats stats)
     {
         playerStats.Name.text = stats.name;
-        playerStats.Health.text = "Health : " + stats.Health;
-        playerStats.Str.text = "Str : " + stats.Str;
-        playerStats.Dex.text = "Dex : " + stats.Dex;
-        playerStats.Mag.text = "Mag : " + stats.Mag;
-        playerStats.Res.text = "Res : " + stats.Res;
-        playerStats.Pie.text = "Pie : " + stats.Pie;
+        playerStats.Health.text = "Health : " + stats.health;
+        playerStats.Str.text = "Att : " + (stats.str + stats.weaponDamage);
+        playerStats.Dex.text = "Def : " + (stats.dex + stats.armor);
+        playerStats.Mag.text = "Mag : " + stats.mag;
+        playerStats.Res.text = "Res : " + stats.res;
+        playerStats.Pie.text = "Pie : " + stats.pie;
     }
 }

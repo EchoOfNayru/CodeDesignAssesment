@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour {
 
     public int enemiesToSpawn;
-    public List<BasicEnemy> enemies = new List<BasicEnemy>();
+    public List<CharacterBase> enemies = new List<CharacterBase>();
     public GameObject basicEnemyPrefab;
     public Transform firstSpawn;
 
@@ -28,7 +28,7 @@ public class EnemyManager : MonoBehaviour {
         {
             GameObject spawnedEnemy = Instantiate(basicEnemyPrefab);
             spawnedEnemy.name = "Enemy " + i;
-            enemies.Add(spawnedEnemy.GetComponent<BasicEnemy>());
+            enemies.Add(spawnedEnemy.GetComponent<CharacterBase>());
         }
         SpawnEnemies();
     }
@@ -37,7 +37,7 @@ public class EnemyManager : MonoBehaviour {
     {
         for (int i = 0; i < enemies.Count; i++)
         {
-            BasicEnemy stats = enemies[i].GetComponent<BasicEnemy>();
+            CharacterBase stats = enemies[i].GetComponent<CharacterBase>();
             stats.health = 20;
             stats.dex = 3;
             Vector3 offset = Vector3.forward * i * -4;
