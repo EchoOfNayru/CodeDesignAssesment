@@ -22,5 +22,6 @@ public class ServiceLocator : MonoBehaviour {
     public PlayerManager playerManager;
     public EnemyManager enemyManager;
     public UIManager uiManager;
+    public Camera mainCamera;
 
 }

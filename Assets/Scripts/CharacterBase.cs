@@ -5,18 +5,68 @@ using UnityEngine;
 public class CharacterBase : MonoBehaviour {
 
     public int health, str, dex, mag, res, pie;
+    public bool isDead;
+    public bool isPlayer;
+    public bool isEnemy;
 
-    public void AttackTarget(CharacterBase attacker, CharacterBase defender)
+    PlayerManager playerManager;
+    CharacterBase currentTarget;
+
+    void Awake()
     {
-        defender.health -= attacker.str - defender.dex;
+        playerManager = ServiceLocator.instance.playerManager;
+    }
 
-        if (defender.health <= 0)
+    void Start()
+    {
+        currentTarget = playerManager.currentEnemy;
+    }
+
+    public virtual bool Attack(CharacterBase defender)
+    {
+        if (currentTarget != null)
         {
-            if (ServiceLocator.instance.enemyManager.enemies.Contains(defender.gameObject))
+            if (currentTarget.isPlayer)
             {
-                ServiceLocator.instance.enemyManager.enemies.Remove(defender.gameObject);
+                BasicPlayer currentPlayer = currentTarget.GetComponent<BasicPlayer>();
+
+                return true;
             }
-            Destroy(defender.gameObject);
+            if (currentTarget.isEnemy)
+            {
+                BasicEnemy currentEnemy = currentTarget.GetComponent<BasicEnemy>();
+                defender.health -= str - defender.dex;
+
+                currentEnemy.updateStats();
+                playerManager.UpdateEnemy(currentEnemy.stats);
+
+                if (defender.health <= 0)
+                {
+                    defender.gameObject.SetActive(false);
+                    defender.isDead = true;
+                    currentEnemy = null;
+                    playerManager.enemyLost();
+                }
+
+                Debug.Log(defender.health);
+                return true;
+            }
+            else
+            {
+                Debug.Log("failed");
+                return false;
+            }
         }
+        else
+        {
+            Debug.Log("failed");
+            return false;
+        }
+    }
+
+    public virtual void UseItem()
+    {
+        Debug.Log("Used Item");
+        
     }
 }

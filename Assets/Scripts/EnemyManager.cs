@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour {
 
     public int enemiesToSpawn;
-    public List<GameObject> enemies = new List<GameObject>();
+    public List<BasicEnemy> enemies = new List<BasicEnemy>();
     public GameObject basicEnemyPrefab;
     public Transform firstSpawn;
 
@@ -27,7 +27,8 @@ public class EnemyManager : MonoBehaviour {
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             GameObject spawnedEnemy = Instantiate(basicEnemyPrefab);
-            enemies.Add(spawnedEnemy);
+            spawnedEnemy.name = "Enemy " + i;
+            enemies.Add(spawnedEnemy.GetComponent<BasicEnemy>());
         }
         SpawnEnemies();
     }
