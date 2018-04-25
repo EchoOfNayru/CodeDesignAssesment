@@ -38,8 +38,6 @@ public class EnemyManager : MonoBehaviour {
         for (int i = 0; i < enemies.Count; i++)
         {
             CharacterBase stats = enemies[i].GetComponent<CharacterBase>();
-            stats.health = 20;
-            stats.dex = 3;
             Vector3 offset = Vector3.forward * i * -4;
             if (i > 2)
             {

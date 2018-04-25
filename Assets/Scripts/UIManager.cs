@@ -39,13 +39,15 @@ public class UIManager : MonoBehaviour {
 
     public void OnAttackClick()
     {
-        if (!playerManager.activeCharacter.Attack(playerManager.currentEnemy))
+        if (playerManager.currentEnemy != null)
         {
-            ShowSelectTarget();
+            playerManager.activeCharacter.Attack(playerManager.currentEnemy);
+            HideSelectTarget();
         }
         else
         {
-            HideSelectTarget();
+            Debug.Log("failed");
+            ShowSelectTarget();
         }
         
 
@@ -122,8 +124,8 @@ public class UIManager : MonoBehaviour {
 
         //show enemy stats in enemy stat UI
         enemyStats.Health.text = "Health : " + stats.health;
-        enemyStats.Strength.text = "Att : " + stats.str;
-        enemyStats.Dex.text = "Def : " + stats.dex;
+        enemyStats.Strength.text = "Att : " + (stats.str + stats.weaponDamage);
+        enemyStats.Dex.text = "Def : " + (stats.dex + stats.armor);
         enemyStats.Res.text = "Res : " + stats.res;
         string weaknessString;
         if (stats.weakness == 1)

@@ -11,8 +11,6 @@ public class PlayerManager : MonoBehaviour {
     public CharacterBase activeCharacter;
     public CharacterBase currentEnemy;
 
-    UIManager uiManager;
-
     public List<CharacterBase> TurnOrder = new List<CharacterBase>();
 
     public delegate void EnemyUpdate(CharacterBase.Stats stats);
@@ -31,8 +29,6 @@ public class PlayerManager : MonoBehaviour {
 
     void Start()
     {
-        uiManager = ServiceLocator.instance.uiManager;
-
         TurnOrder.Add(tank);
         TurnOrder.Add(magic);
         TurnOrder.Add(healer);

@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class CharacterBase : MonoBehaviour {
 
-    public int health, str, dex, mag, res, pie;
-    public int weaponDamage, armor;
-    public int weakness;
     public bool isDead;
     public bool isPlayer;
     public bool isEnemy;
-    
 
+    [System.Serializable]
     public struct Stats
     {
         public string name;
@@ -31,82 +28,41 @@ public class CharacterBase : MonoBehaviour {
     PlayerManager playerManager;
     CharacterBase currentTarget;
 
-    void Awake()
-    {
-        
-    }
-
     void Start()
     {
         playerManager = ServiceLocator.instance.playerManager;
 
         currentTarget = playerManager.currentEnemy;
-
-        if (isPlayer)
-        {
-            updateStats();
-        }
         if (isEnemy)
         {
             name = gameObject.name;
-            health = Random.Range(15, 35);
-            str = Random.Range(1, 8) + 1;
-            dex = Random.Range(1, 5) + 1;
-            mag = Random.Range(1, 8) + 1;
-            res = Random.Range(1, 5) + 1;
-            pie = Random.Range(1, 8) + 1;
-
-            updateStats();
+            myStats.health = Random.Range(15, 35);
+            myStats.str = Random.Range(1, 8) + 1;
+            myStats.dex = Random.Range(1, 5) + 1;
+            myStats.mag = Random.Range(1, 8) + 1;
+            myStats.res = Random.Range(1, 5) + 1;
+            myStats.pie = Random.Range(1, 8) + 1;
         }
     }
 
-    public virtual bool Attack(CharacterBase defender)
+    public virtual void Attack(CharacterBase defender)
     {
-        currentTarget = playerManager.currentEnemy;
-        if (currentTarget != null)
+        defender.myStats.health -= myStats.str + myStats.weaponDamage - defender.myStats.dex;
+
+        playerManager.UpdateEnemy(defender.myStats);
+
+        if (defender.myStats.health <= 0)
         {
-            CharacterBase currentDefender = currentTarget.GetComponent<CharacterBase>();
-
-            defender.health -= str + weaponDamage - defender.dex;
-
-            currentDefender.updateStats();
-            playerManager.UpdateEnemy(currentDefender.myStats);
-
-            if (defender.health <= 0)
-            {
-                defender.gameObject.SetActive(false);
-                defender.isDead = true;
-                currentDefender = null;
-                playerManager.enemyLost();
-            }
-
-            Debug.Log(defender.health);
-            return true;
+            defender.gameObject.SetActive(false);
+            defender.isDead = true;
+            playerManager.enemyLost();
         }
-        else
-        {
-            Debug.Log("failed");
-            return false;
-        }
+
+        playerManager.EndTurn();
     }
 
     public virtual void UseItem()
     {
         Debug.Log("Used Item");
-        
-    }
-
-    public void updateStats()
-    {
-        myStats.name = name;
-        myStats.health = health;
-        myStats.str = str;
-        myStats.weaponDamage = weaponDamage;
-        myStats.dex = dex;
-        myStats.armor = armor;
-        myStats.mag = mag;
-        myStats.res = res;
-        myStats.pie = pie;
-        myStats.weakness = weakness;
     }
 }
