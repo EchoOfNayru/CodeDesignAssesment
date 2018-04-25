@@ -24,15 +24,20 @@ public class CharacterBase : MonoBehaviour {
     }
 
     public Stats myStats;
+    public GameObject posHolder;
+    public float speed;
 
     PlayerManager playerManager;
+
+    bool isAttacking;
+    float isAttackingTimer;
     CharacterBase currentTarget;
+    Transform startPos;
 
     void Start()
     {
         playerManager = ServiceLocator.instance.playerManager;
-
-        currentTarget = playerManager.currentEnemy;
+        
         if (isEnemy)
         {
             name = gameObject.name;
@@ -43,11 +48,26 @@ public class CharacterBase : MonoBehaviour {
             myStats.res = Random.Range(1, 5) + 1;
             myStats.pie = Random.Range(1, 8) + 1;
         }
+        GameObject temp = Instantiate(posHolder);
+        temp.transform.position = transform.position;
+
+        startPos = temp.transform;
+    }
+
+    void Update()
+    {
+        if (isAttacking)
+        {
+            ShowAttack();
+        }
     }
 
     public virtual void Attack(CharacterBase defender)
     {
         defender.myStats.health -= myStats.str + myStats.weaponDamage - defender.myStats.dex;
+
+        isAttacking = true;
+        isAttackingTimer = 0;
 
         playerManager.UpdateEnemy(defender.myStats);
 
@@ -64,5 +84,41 @@ public class CharacterBase : MonoBehaviour {
     public virtual void UseItem()
     {
         Debug.Log("Used Item");
+    }
+
+    public virtual void ShowAttack()
+    {
+        currentTarget = playerManager.currentEnemy;
+
+        if (currentTarget != null)
+        {
+            if (isAttackingTimer == 0)
+            {
+                Transform targetPos = currentTarget.transform;
+
+                transform.position = targetPos.position - (Vector3.right * 3);
+            }
+
+            if (isAttackingTimer >= 0.3f && isAttackingTimer <= 0.6f)
+            {
+                transform.Translate(Vector3.right * speed);
+            }
+            else if (isAttackingTimer >= 0.6f && isAttackingTimer <= 0.9f)
+            {
+                transform.Translate(-Vector3.right * speed);
+            }
+
+            if (isAttackingTimer >= 1)
+            {
+                transform.position = startPos.position;
+            }
+
+            isAttackingTimer += Time.deltaTime;
+            Debug.Log(isAttackingTimer);
+        }
+        else
+        {
+            transform.position = startPos.position;
+        }
     }
 }

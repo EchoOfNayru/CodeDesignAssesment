@@ -22,6 +22,8 @@ public class PlayerManager : MonoBehaviour {
     public delegate void PlayerUpdate(CharacterBase.Stats stats);
     public PlayerUpdate UpdatePlayer;
 
+    UIManager uiManager;
+
     void Awake()
     {
         ServiceLocator.instance.playerManager = this;
@@ -29,6 +31,8 @@ public class PlayerManager : MonoBehaviour {
 
     void Start()
     {
+        uiManager = ServiceLocator.instance.uiManager;
+
         TurnOrder.Add(tank);
         TurnOrder.Add(magic);
         TurnOrder.Add(healer);
@@ -53,7 +57,7 @@ public class PlayerManager : MonoBehaviour {
                         {
                             currentEnemy = targetCache;
                             UpdateEnemy(currentEnemy.myStats);
-                            Debug.Log(currentEnemy);
+                            uiManager.arrowMovementTimer = 0;
                         }
                     }
                 }

@@ -21,6 +21,9 @@ public class UIManager : MonoBehaviour {
 
     PlayerManager playerManager;
 
+    [HideInInspector]
+    public float arrowMovementTimer;
+
     void Awake()
     {
         ServiceLocator.instance.uiManager = this;
@@ -37,6 +40,11 @@ public class UIManager : MonoBehaviour {
         playerManager.enemyLost += NoTargetedEnemy;
     }
 
+    void Update()
+    {
+        makeArrowLookSexy();
+    }
+
     public void OnAttackClick()
     {
         if (playerManager.currentEnemy != null)
@@ -46,7 +54,7 @@ public class UIManager : MonoBehaviour {
         }
         else
         {
-            Debug.Log("failed");
+            Debug.Log("error: no target selected");
             ShowSelectTarget();
         }
         
@@ -159,5 +167,22 @@ public class UIManager : MonoBehaviour {
         playerStats.Mag.text = "Mag : " + stats.mag;
         playerStats.Res.text = "Res : " + stats.res;
         playerStats.Pie.text = "Pie : " + stats.pie;
+    }
+
+    public void makeArrowLookSexy()
+    {
+        arrowMovementTimer += Time.deltaTime;
+        if (arrowMovementTimer < 2)
+        {
+            targetArrow.transform.position = new Vector3(targetArrow.transform.position.x, targetArrow.transform.position.y + 0.1f);
+        }
+        else if (arrowMovementTimer >= 4)
+        {
+            arrowMovementTimer = 0;
+        }
+        else
+        {
+            targetArrow.transform.position = new Vector3(targetArrow.transform.position.x, targetArrow.transform.position.y - 0.1f);
+        }
     }
 }

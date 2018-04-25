@@ -598,6 +598,8 @@ MonoBehaviour:
     res: 13
     pie: 2
     weakness: 0
+  posHolder: {fileID: 1230825626550636, guid: 0a14726af5a18eb44b50bdcc250b6ea9, type: 2}
+  speed: 0.3
 --- !u!1 &233332067
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,7 +868,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -92.66415, y: 83.76549}
+  m_AnchoredPosition: {x: -92.66406, y: 83.7655}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &387857826
@@ -1364,6 +1366,8 @@ MonoBehaviour:
     res: 3
     pie: 6
     weakness: 0
+  posHolder: {fileID: 1230825626550636, guid: 0a14726af5a18eb44b50bdcc250b6ea9, type: 2}
+  speed: 0.3
 --- !u!1 &791366461
 GameObject:
   m_ObjectHideFlags: 0
@@ -2235,6 +2239,7 @@ MonoBehaviour:
   selectTarget: {fileID: 1784668032}
   enemyStats: {fileID: 387857828}
   playerStats: {fileID: 1443356636}
+  arrowMovementTimer: 0
 --- !u!4 &1130013419
 Transform:
   m_ObjectHideFlags: 0
@@ -2861,7 +2866,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 22
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 0
@@ -3086,7 +3091,7 @@ RectTransform:
   m_GameObject: {fileID: 1516487412}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 1.7233807, z: 0.86169034}
+  m_LocalScale: {x: 8.05, y: 1.7233807, z: 0.86169034}
   m_Children: []
   m_Father: {fileID: 804559380}
   m_RootOrder: 0
@@ -3599,6 +3604,8 @@ MonoBehaviour:
     res: 8
     pie: 11
     weakness: 0
+  posHolder: {fileID: 1230825626550636, guid: 0a14726af5a18eb44b50bdcc250b6ea9, type: 2}
+  speed: 0.3
 --- !u!1 &1836245302
 GameObject:
   m_ObjectHideFlags: 0

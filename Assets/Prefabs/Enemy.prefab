@@ -107,12 +107,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9202407be28dff44186239f0c6c466d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  str: 0
-  dex: 0
-  mag: 0
-  res: 0
-  pie: 0
   isDead: 0
   isPlayer: 0
   isEnemy: 1
+  myStats:
+    name: 
+    health: 0
+    str: 0
+    weaponDamage: 0
+    dex: 0
+    armor: 0
+    mag: 0
+    res: 0
+    pie: 0
+    weakness: 0
+  posHolder: {fileID: 1230825626550636, guid: 0a14726af5a18eb44b50bdcc250b6ea9, type: 2}
+  speed: 0.1
