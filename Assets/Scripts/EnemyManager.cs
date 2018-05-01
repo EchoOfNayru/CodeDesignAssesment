@@ -12,10 +12,7 @@ public class EnemyManager : MonoBehaviour {
     void Awake()
     {
         ServiceLocator.instance.enemyManager = this;
-    }
 
-    void Start()
-    {
         if (enemiesToSpawn > 5)
         {
             enemiesToSpawn = 5;
@@ -30,6 +27,11 @@ public class EnemyManager : MonoBehaviour {
             spawnedEnemy.name = "Enemy " + i;
             enemies.Add(spawnedEnemy.GetComponent<CharacterBase>());
         }
+    }
+
+    void Start()
+    {
+        
         SpawnEnemies();
     }
 

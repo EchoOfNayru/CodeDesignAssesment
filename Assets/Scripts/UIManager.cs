@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour {
 
     public EnemyStatsText enemyStats;
     public PlayerStatsText playerStats;
+    public Text testActiveCharacter;
 
     PlayerManager playerManager;
 
@@ -49,7 +50,8 @@ public class UIManager : MonoBehaviour {
     {
         if (playerManager.currentEnemy != null)
         {
-            playerManager.activeCharacter.Attack(playerManager.currentEnemy);
+            playerManager.activeCharacter.isAttacking = true;
+
             HideSelectTarget();
         }
         else
@@ -184,5 +186,10 @@ public class UIManager : MonoBehaviour {
         {
             targetArrow.transform.position = new Vector3(targetArrow.transform.position.x, targetArrow.transform.position.y - 0.1f);
         }
+    }
+
+    public void ShowActiveCharacter(CharacterBase activeCharacter)
+    {
+        testActiveCharacter.text = activeCharacter.myStats.name;
     }
 }

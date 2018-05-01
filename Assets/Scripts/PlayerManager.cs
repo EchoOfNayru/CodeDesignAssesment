@@ -23,6 +23,7 @@ public class PlayerManager : MonoBehaviour {
     public PlayerUpdate UpdatePlayer;
 
     UIManager uiManager;
+    EnemyManager enemyManager;
 
     void Awake()
     {
@@ -32,10 +33,16 @@ public class PlayerManager : MonoBehaviour {
     void Start()
     {
         uiManager = ServiceLocator.instance.uiManager;
+        enemyManager = ServiceLocator.instance.enemyManager;
 
         TurnOrder.Add(tank);
         TurnOrder.Add(magic);
         TurnOrder.Add(healer);
+        TurnOrder.Add(enemyManager.enemies[0]);
+        TurnOrder.Add(enemyManager.enemies[1]);
+        TurnOrder.Add(enemyManager.enemies[2]);
+        TurnOrder.Add(enemyManager.enemies[3]);
+        TurnOrder.Add(enemyManager.enemies[4]);
 
         EndTurn();
     }
@@ -63,11 +70,25 @@ public class PlayerManager : MonoBehaviour {
                 }
             }
         }
+        
+        if (activeCharacter.isEnemy)
+        {
+            uiManager.attackButton.interactable = false;
+            uiManager.skillsButton.interactable = false;
+            uiManager.defendButton.interactable = false;
+            uiManager.itemButton.interactable = false;
+            uiManager.runButton.interactable = false;
+            if (!activeCharacter.isAttacking)
+            {
+                activeCharacter.isAttacking = true;
+            }
+        }
     }
 
     public void EndTurn()
     {
         activeCharacter = TurnOrder[0];
+        uiManager.ShowActiveCharacter(activeCharacter);
         TurnOrder.Remove(activeCharacter);
         TurnOrder.Add(activeCharacter);
         if (activeCharacter.isPlayer)

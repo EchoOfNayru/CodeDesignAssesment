@@ -113,6 +113,80 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &14818937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 14818938}
+  - component: {fileID: 14818940}
+  - component: {fileID: 14818939}
+  m_Layer: 5
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &14818938
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 14818937}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.57492465, y: 0.2605968, z: 1}
+  m_Children: []
+  m_Father: {fileID: 791366462}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.000005344984, y: 32.9}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &14818939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 14818937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Name
+--- !u!222 &14818940
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 14818937}
 --- !u!1 &27790978
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,7 +573,7 @@ GameObject:
   - component: {fileID: 232276012}
   - component: {fileID: 232276011}
   - component: {fileID: 232276010}
-  - component: {fileID: 232276013}
+  - component: {fileID: 232276014}
   m_Layer: 0
   m_Name: Magic
   m_TagString: Untagged
@@ -573,7 +647,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 232276008}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &232276013
+--- !u!114 &232276014
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -581,7 +655,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 232276008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9202407be28dff44186239f0c6c466d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cf3c389fa4ce6942ad5b2299a11126b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
@@ -589,17 +663,18 @@ MonoBehaviour:
   isEnemy: 0
   myStats:
     name: Dale the Wizard
-    health: 34
-    str: 4
-    weaponDamage: 5
-    dex: 4
-    armor: 3
-    mag: 11
-    res: 13
-    pie: 2
+    health: 45
+    str: 7
+    weaponDamage: 6
+    dex: 6
+    armor: 6
+    mag: 14
+    res: 12
+    pie: 3
     weakness: 0
   posHolder: {fileID: 1230825626550636, guid: 0a14726af5a18eb44b50bdcc250b6ea9, type: 2}
-  speed: 0.3
+  speed: 0.15
+  isAttacking: 0
 --- !u!1 &233332067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,7 +1342,7 @@ GameObject:
   - component: {fileID: 740362747}
   - component: {fileID: 740362746}
   - component: {fileID: 740362745}
-  - component: {fileID: 740362748}
+  - component: {fileID: 740362749}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Untagged
@@ -1341,7 +1416,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 740362743}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &740362748
+--- !u!114 &740362749
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1349,25 +1424,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 740362743}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9202407be28dff44186239f0c6c466d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cf3c389fa4ce6942ad5b2299a11126b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
   isPlayer: 1
   isEnemy: 0
   myStats:
-    name: Sherwin Williams
+    name: Grog
     health: 60
-    str: 8
-    weaponDamage: 12
-    dex: 7
+    str: 15
+    weaponDamage: 6
+    dex: 12
     armor: 8
     mag: 2
-    res: 3
+    res: 6
     pie: 6
     weakness: 0
   posHolder: {fileID: 1230825626550636, guid: 0a14726af5a18eb44b50bdcc250b6ea9, type: 2}
-  speed: 0.3
+  speed: 0.15
+  isAttacking: 0
 --- !u!1 &791366461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,6 +1473,7 @@ RectTransform:
   m_Children:
   - {fileID: 1036863905}
   - {fileID: 1222678504}
+  - {fileID: 14818938}
   m_Father: {fileID: 804559380}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1584,9 +1661,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874d7aa8f824bdf439c5325ef280d809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tank: {fileID: 740362748}
-  magic: {fileID: 232276013}
-  healer: {fileID: 1785621652}
+  tank: {fileID: 740362749}
+  magic: {fileID: 232276014}
+  healer: {fileID: 1785621653}
   activeCharacter: {fileID: 0}
   currentEnemy: {fileID: 0}
   TurnOrder: []
@@ -2239,6 +2316,7 @@ MonoBehaviour:
   selectTarget: {fileID: 1784668032}
   enemyStats: {fileID: 387857828}
   playerStats: {fileID: 1443356636}
+  testActiveCharacter: {fileID: 14818939}
   arrowMovementTimer: 0
 --- !u!4 &1130013419
 Transform:
@@ -3505,7 +3583,7 @@ GameObject:
   - component: {fileID: 1785621651}
   - component: {fileID: 1785621650}
   - component: {fileID: 1785621649}
-  - component: {fileID: 1785621652}
+  - component: {fileID: 1785621653}
   m_Layer: 0
   m_Name: Healer
   m_TagString: Untagged
@@ -3579,7 +3657,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1785621647}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1785621652
+--- !u!114 &1785621653
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -3587,7 +3665,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1785621647}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9202407be28dff44186239f0c6c466d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cf3c389fa4ce6942ad5b2299a11126b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
@@ -3595,17 +3673,18 @@ MonoBehaviour:
   isEnemy: 0
   myStats:
     name: Alexander Anderson
-    health: 48
-    str: 5
-    weaponDamage: 10
-    dex: 3
-    armor: 15
-    mag: 5
+    health: 55
+    str: 8
+    weaponDamage: 6
+    dex: 8
+    armor: 8
+    mag: 6
     res: 8
     pie: 11
     weakness: 0
   posHolder: {fileID: 1230825626550636, guid: 0a14726af5a18eb44b50bdcc250b6ea9, type: 2}
-  speed: 0.3
+  speed: 0.15
+  isAttacking: 0
 --- !u!1 &1836245302
 GameObject:
   m_ObjectHideFlags: 0
@@ -3680,6 +3759,46 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1836245302}
+--- !u!1 &1864871823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1864871825}
+  - component: {fileID: 1864871824}
+  m_Layer: 0
+  m_Name: TIMECHEATS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1864871824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1864871823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f076333b5ea492e48b62582ac793eddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1864871825
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1864871823}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 89.291504, y: 504.40854, z: 189.32587}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1981589314
 GameObject:
   m_ObjectHideFlags: 0

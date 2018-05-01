@@ -27,12 +27,12 @@ public class CharacterBase : MonoBehaviour {
     public GameObject posHolder;
     public float speed;
 
-    PlayerManager playerManager;
+    protected PlayerManager playerManager;
 
-    bool isAttacking;
-    float isAttackingTimer;
-    CharacterBase currentTarget;
-    Transform startPos;
+    public bool isAttacking;
+    protected float isAttackingTimer;
+    protected CharacterBase currentTarget;
+    protected Transform startPos;
 
     void Start()
     {
@@ -64,7 +64,12 @@ public class CharacterBase : MonoBehaviour {
 
     public virtual void Attack(CharacterBase defender)
     {
-        defender.myStats.health -= myStats.str + myStats.weaponDamage - defender.myStats.dex;
+        int damage = myStats.str + myStats.weaponDamage - defender.myStats.dex;
+        if (damage < 1)
+        {
+            damage = 1;
+        }
+        defender.myStats.health -= damage;
 
         isAttacking = true;
         isAttackingTimer = 0;
@@ -76,6 +81,7 @@ public class CharacterBase : MonoBehaviour {
             defender.gameObject.SetActive(false);
             defender.isDead = true;
             playerManager.enemyLost();
+            playerManager.TurnOrder.Remove(defender);
         }
 
         playerManager.EndTurn();
@@ -88,37 +94,6 @@ public class CharacterBase : MonoBehaviour {
 
     public virtual void ShowAttack()
     {
-        currentTarget = playerManager.currentEnemy;
-
-        if (currentTarget != null)
-        {
-            if (isAttackingTimer == 0)
-            {
-                Transform targetPos = currentTarget.transform;
-
-                transform.position = targetPos.position - (Vector3.right * 3);
-            }
-
-            if (isAttackingTimer >= 0.3f && isAttackingTimer <= 0.6f)
-            {
-                transform.Translate(Vector3.right * speed);
-            }
-            else if (isAttackingTimer >= 0.6f && isAttackingTimer <= 0.9f)
-            {
-                transform.Translate(-Vector3.right * speed);
-            }
-
-            if (isAttackingTimer >= 1)
-            {
-                transform.position = startPos.position;
-            }
-
-            isAttackingTimer += Time.deltaTime;
-            Debug.Log(isAttackingTimer);
-        }
-        else
-        {
-            transform.position = startPos.position;
-        }
+        Debug.Log("I DIDNT DO");
     }
 }
